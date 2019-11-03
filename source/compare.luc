@@ -1,0 +1,20 @@
+module compare (
+    input clk,
+    input rst,
+    input alufn[6], 
+    input z,
+    input v,
+    input n,
+    output out[16]
+  ) {
+  
+always{
+  out[15:1] = 15b0;
+
+  case (alufn[2-:2]){
+  2b01: out[0] = z; 
+  2b10: out[0] = n ^ v;
+  2b11: out[0] = z | (n^v);
+  }
+  }
+}

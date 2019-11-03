@@ -1,0 +1,8 @@
+INTSTYLE=pa
+INFILE=D:\SUTD\term 4 sophomore\50.002 Computer Structure\1D\game design\code\ALU\16BitALU\work\planAhead\16BitALU\16BitALU.runs\impl_1\mojo_top_0_routed.ncd
+OUTFILE=D:\SUTD\term 4 sophomore\50.002 Computer Structure\1D\game design\code\ALU\16BitALU\work\planAhead\16BitALU\16BitALU.runs\impl_1\mojo_top_0.bit
+FAMILY=Spartan6
+PART=xc6slx9-2tqg144
+WORKINGDIR=D:\SUTD\term 4 sophomore\50.002 Computer Structure\1D\game design\code\ALU\16BitALU\work\planAhead\16BitALU\16BitALU.runs\impl_1
+LICENSE=WebPack
+USER_INFO=211812374_0_0_716

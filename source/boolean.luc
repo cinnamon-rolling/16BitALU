@@ -1,0 +1,23 @@
+module boolean (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input alufn[6], // io dip input
+    input a[16], // 16 bit input a
+    input b[16], // 16 bit input b
+    output out[16] // 16 bit output
+  ) {
+
+  always {
+    out = 0;
+    
+    case (alufn[3:0]){
+    
+    4b1000: out = a & b; // and case 1
+    4b1110: out = a | b; // or case 2
+    4b0110: out = a ^ b; // xor case 3
+    4b1010: out = a; // input a as output case 4
+    
+    }
+}
+}

@@ -1,0 +1,62 @@
+module alumodule (
+    input clk,  // clock
+    input rst,  // reset
+    
+    // inputs
+    input alufn[6],
+    input a[16],
+    input b[16],
+    
+    //outputs
+    output alu[16],
+    output z[1],
+    output v[1],
+    output n[1]
+  ) {
+  
+  .clk(clk) {
+    // The reset conditioner is used to synchronize the reset signal to the FPGA
+    // clock. This ensures the entire FPGA comes out of reset at the same time.
+    .rst(rst) {
+      add add;
+      compare compare;
+      boolean boolean;
+      shift shift;
+
+    }
+  }
+
+   always {
+    add.a = a;                      // add module
+    add.b = b;
+    add.alufn = alufn;
+    compare.v = add.v;                 // compare module
+    compare.n = add.n;
+    compare.z = add.z;
+    compare.alufn = alufn;
+    boolean.a = a;                    // boolean module
+    boolean.b = b;
+    boolean.alufn = alufn;
+    shift.a = a;                    // shift module
+    shift.b = b;
+    shift.alufn = alufn;
+    
+    z = add.z;                      // assign z output
+    v = add.v;                      // assign v output   
+    n = add.n;                      // assign n output
+    
+    case(alufn[5:4]){
+      2b00:                          // if alufn[5:4] == 00: adder 
+        alu = add.out; 
+      2b01:                          // if alufn[5:4] == 01: boolean
+        alu = boolean.out;
+      2b10:                          // if alufn[5:4] == 10: shifter
+        alu = shift.out;
+      2b11:                          // if alufn[5:4] == 11: compare
+        alu = compare.out;
+      default:
+        alu = 16b0;
+  }
+
+  }
+}

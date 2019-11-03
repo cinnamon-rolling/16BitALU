@@ -1,0 +1,96 @@
+module test_cases (
+    input clk,  // clock
+    input rst,  // reset
+    
+    // outputs
+    output led_result[8],
+    output led_alu_1[8],
+    output led_alu_2[8]
+  ) {
+  
+    .clk(clk){
+      //edge_detector edge_detector(#RISE(1), #FALL(0));
+    
+  .rst(rst) {
+    dff counter[28];     // time taken for each cycle is 2^28/50E6
+    fsm state = {ADD, SUBTRACT, ERROR};
+    dff alu[16];
+    dff z[1];
+    dff v[1];
+    dff n[1];
+    alumodule alumodule;
+  }
+  }
+    
+sig expected_alu[16];
+  
+  always {
+    // initialise
+    counter.d = counter.q + 1; // connects dff's input to output + 1. everytime clk goes to high, d = q + 1
+    led_result = 8b00000000;
+    led_alu_1 = 8b00000000;
+    led_alu_2 = 8b00000000;
+
+    alu.d = alumodule.alu;
+    z.d = alumodule.z;
+    v.d = alumodule.v;
+    n.d = alumodule.n;
+    alumodule.a = 16b0000000000000000;
+    alumodule.b = 16b0000000000000000;
+    alumodule.alufn = 6b000000;
+   
+    
+      
+    case (state.q){
+      state.ADD:
+        alumodule.alufn = 6b000000;             
+        alumodule.a = 16b0101010110101011;
+        alumodule.b = 16b0010000001000100;
+        
+        expected_alu = 16b0111010111101111;
+        led_alu_1 = alu.q[7:0];
+        led_alu_2 = alu.q[15:8];
+        
+        
+        if (alu.q == expected_alu & z.q == 0 & v.q == 0 & n.q == 0){
+            led_result = 8b00000000;
+            
+            if (counter.q[27] == 0){
+              state.d = state.SUBTRACT;
+                }
+            }
+       else {
+            state.d = state.ERROR;
+            }
+            
+      state.SUBTRACT:
+          alumodule.alufn = 6b000001;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b01010101100111;
+          led_alu_1 = alu.q[7:0];
+          led_alu_2 = alu.q[15:8];
+
+          
+          if (alu.q == expected_alu & z.q == 0 & v.q == 1 & n.q == 0){
+            led_result = 8b01000000;
+             
+            if (counter.q[27] == 1){
+              state.d = state.ADD;
+                }
+            }
+          else {
+            state.d = state.ERROR;
+            } 
+            
+      state.ERROR:
+          if (counter.q[27] == 1){
+          led_result = 8b11111111;
+            }
+        }
+     
+        
+    }
+  }
+

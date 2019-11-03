@@ -1,0 +1,24 @@
+module shift (
+    input clk,
+    input rst,
+    
+    input alufn[6],
+    input a[16],
+    input b[16],
+    output out[16]
+) { 
+  
+always {
+
+  case(alufn[1:0]) {
+    b00:
+      out = a << b; // shift left
+    b01:
+      out = a >> b; // shift right
+    b11:
+      out = $signed(a) >>> b; // arithmetic shift right
+    default:
+      out = a << b;        
+    }
+  }
+}
