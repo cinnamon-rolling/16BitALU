@@ -3,7 +3,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.06 secs
+Total CPU time to Xst completion: 0.05 secs
  
 --> Reading design: mojo_top_0.prj
 
@@ -53,14 +53,16 @@ Netlist Hierarchy                  : rebuilt
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/shift_7.v" into library work
-Parsing module <shift_7>.
-Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/compare_5.v" into library work
-Parsing module <compare_5>.
-Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/boolean_6.v" into library work
-Parsing module <boolean_6>.
-Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/add_4.v" into library work
-Parsing module <add_4>.
+Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/shift_8.v" into library work
+Parsing module <shift_8>.
+Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/compare_6.v" into library work
+Parsing module <compare_6>.
+Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/boolean_7.v" into library work
+Parsing module <boolean_7>.
+Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/add_5.v" into library work
+Parsing module <add_5>.
+Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/multiply_4.v" into library work
+Parsing module <multiply_4>.
 Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/alumodule_3.v" into library work
 Parsing module <alumodule_3>.
 Analyzing Verilog file "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/test_cases_2.v" into library work
@@ -82,13 +84,15 @@ Elaborating module <test_cases_2>.
 
 Elaborating module <alumodule_3>.
 
-Elaborating module <add_4>.
+Elaborating module <add_5>.
 
-Elaborating module <compare_5>.
+Elaborating module <compare_6>.
 
-Elaborating module <boolean_6>.
+Elaborating module <boolean_7>.
 
-Elaborating module <shift_7>.
+Elaborating module <shift_8>.
+
+Elaborating module <multiply_4>.
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -121,32 +125,28 @@ Unit <reset_conditioner_1> synthesized.
 
 Synthesizing Unit <test_cases_2>.
     Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/test_cases_2.v".
-    Found 16-bit register for signal <M_alu_q>.
-    Found 1-bit register for signal <M_z_q>.
-    Found 1-bit register for signal <M_v_q>.
-    Found 1-bit register for signal <M_n_q>.
-    Found 2-bit register for signal <M_state_q>.
+    Found 4-bit register for signal <M_state_q>.
     Found 28-bit register for signal <M_counter_q>.
     Found finite state machine <FSM_0> for signal <M_state_q>.
     -----------------------------------------------------------------------
-    | States             | 3                                              |
-    | Transitions        | 13                                             |
-    | Inputs             | 6                                              |
-    | Outputs            | 17                                             |
+    | States             | 14                                             |
+    | Transitions        | 48                                             |
+    | Inputs             | 17                                             |
+    | Outputs            | 34                                             |
     | Clock              | clk (rising_edge)                              |
     | Reset              | rst (positive)                                 |
     | Reset type         | synchronous                                    |
-    | Reset State        | 00                                             |
-    | Power Up State     | 00                                             |
+    | Reset State        | 0000                                           |
+    | Power Up State     | 0000                                           |
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 28-bit adder for signal <M_counter_d> created at line 56.
-    Found 8-bit 4-to-1 multiplexer for signal <led_result> created at line 68.
+    Found 28-bit adder for signal <M_counter_d> created at line 83.
+    Found 8-bit 15-to-1 multiplexer for signal <led_result> created at line 99.
     Summary:
 	inferred   1 Adder/Subtractor(s).
-	inferred  47 D-type flip-flop(s).
-	inferred   3 Multiplexer(s).
+	inferred  28 D-type flip-flop(s).
+	inferred   5 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <test_cases_2> synthesized.
 
@@ -157,8 +157,8 @@ Synthesizing Unit <alumodule_3>.
 	inferred   1 Multiplexer(s).
 Unit <alumodule_3> synthesized.
 
-Synthesizing Unit <add_4>.
-    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/add_4.v".
+Synthesizing Unit <add_5>.
+    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/add_5.v".
 WARNING:Xst:647 - Input <alufn<5:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -167,10 +167,10 @@ WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and lef
     Summary:
 	inferred   2 Adder/Subtractor(s).
 	inferred   2 Multiplexer(s).
-Unit <add_4> synthesized.
+Unit <add_5> synthesized.
 
-Synthesizing Unit <compare_5>.
-    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/compare_5.v".
+Synthesizing Unit <compare_6>.
+    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/compare_6.v".
 WARNING:Xst:647 - Input <alufn<0:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <alufn<5:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -181,18 +181,18 @@ WARNING:Xst:737 - Found 1-bit latch for signal <out<0>>. Latches may be generate
     Summary:
 	inferred   1 Latch(s).
 	inferred   2 Multiplexer(s).
-Unit <compare_5> synthesized.
+Unit <compare_6> synthesized.
 
-Synthesizing Unit <boolean_6>.
-    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/boolean_6.v".
+Synthesizing Unit <boolean_7>.
+    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/boolean_7.v".
 WARNING:Xst:647 - Input <alufn<5:4>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
     Summary:
-Unit <boolean_6> synthesized.
+Unit <boolean_7> synthesized.
 
-Synthesizing Unit <shift_7>.
-    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/shift_7.v".
+Synthesizing Unit <shift_8>.
+    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/shift_8.v".
 WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
@@ -203,30 +203,90 @@ WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and lef
     Summary:
 	inferred   4 Multiplexer(s).
 	inferred   3 Combinational logic shifter(s).
-Unit <shift_7> synthesized.
+Unit <shift_8> synthesized.
+
+Synthesizing Unit <multiply_4>.
+    Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/multiply_4.v".
+WARNING:Xst:647 - Input <clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <rst> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8x8-bit multiplier for signal <a[7]_b[7]_MuLt_0_OUT> created at line 22.
+    Summary:
+	inferred   1 Multiplier(s).
+	inferred   1 Multiplexer(s).
+Unit <multiply_4> synthesized.
+
+Synthesizing Unit <div_8u_8u>.
+    Related source file is "".
+    Found 16-bit adder for signal <n0292> created at line 0.
+    Found 16-bit adder for signal <GND_14_o_b[7]_add_1_OUT> created at line 0.
+    Found 15-bit adder for signal <n0296> created at line 0.
+    Found 15-bit adder for signal <GND_14_o_b[7]_add_3_OUT> created at line 0.
+    Found 14-bit adder for signal <n0300> created at line 0.
+    Found 14-bit adder for signal <GND_14_o_b[7]_add_5_OUT> created at line 0.
+    Found 13-bit adder for signal <n0304> created at line 0.
+    Found 13-bit adder for signal <GND_14_o_b[7]_add_7_OUT> created at line 0.
+    Found 12-bit adder for signal <n0308> created at line 0.
+    Found 12-bit adder for signal <GND_14_o_b[7]_add_9_OUT> created at line 0.
+    Found 11-bit adder for signal <n0312> created at line 0.
+    Found 11-bit adder for signal <GND_14_o_b[7]_add_11_OUT> created at line 0.
+    Found 10-bit adder for signal <n0316> created at line 0.
+    Found 10-bit adder for signal <GND_14_o_b[7]_add_13_OUT> created at line 0.
+    Found 9-bit adder for signal <n0320> created at line 0.
+    Found 9-bit adder for signal <GND_14_o_b[7]_add_15_OUT> created at line 0.
+    Found 16-bit comparator lessequal for signal <BUS_0001> created at line 0
+    Found 15-bit comparator lessequal for signal <BUS_0002> created at line 0
+    Found 14-bit comparator lessequal for signal <BUS_0003> created at line 0
+    Found 13-bit comparator lessequal for signal <BUS_0004> created at line 0
+    Found 12-bit comparator lessequal for signal <BUS_0005> created at line 0
+    Found 11-bit comparator lessequal for signal <BUS_0006> created at line 0
+    Found 10-bit comparator lessequal for signal <BUS_0007> created at line 0
+    Found 9-bit comparator lessequal for signal <BUS_0008> created at line 0
+    Found 8-bit comparator lessequal for signal <BUS_0009> created at line 0
+    Summary:
+	inferred  16 Adder/Subtractor(s).
+	inferred   9 Comparator(s).
+	inferred  57 Multiplexer(s).
+Unit <div_8u_8u> synthesized.
 
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 3
- 16-bit adder                                          : 1
+# Multipliers                                          : 1
+ 8x8-bit multiplier                                    : 1
+# Adders/Subtractors                                   : 19
+ 10-bit adder                                          : 2
+ 11-bit adder                                          : 2
+ 12-bit adder                                          : 2
+ 13-bit adder                                          : 2
+ 14-bit adder                                          : 2
+ 15-bit adder                                          : 2
+ 16-bit adder                                          : 3
  16-bit subtractor                                     : 1
  28-bit adder                                          : 1
-# Registers                                            : 6
- 1-bit register                                        : 3
- 16-bit register                                       : 1
+ 9-bit adder                                           : 2
+# Registers                                            : 2
  28-bit register                                       : 1
  4-bit register                                        : 1
 # Latches                                              : 1
  1-bit latch                                           : 1
-# Multiplexers                                         : 12
- 1-bit 2-to-1 multiplexer                              : 1
+# Comparators                                          : 9
+ 10-bit comparator lessequal                           : 1
+ 11-bit comparator lessequal                           : 1
+ 12-bit comparator lessequal                           : 1
+ 13-bit comparator lessequal                           : 1
+ 14-bit comparator lessequal                           : 1
+ 15-bit comparator lessequal                           : 1
+ 16-bit comparator lessequal                           : 1
+ 8-bit comparator lessequal                            : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 72
+ 1-bit 2-to-1 multiplexer                              : 57
  1-bit 3-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 4
+ 16-bit 2-to-1 multiplexer                             : 5
  16-bit 4-to-1 multiplexer                             : 3
- 8-bit 2-to-1 multiplexer                              : 2
- 8-bit 4-to-1 multiplexer                              : 1
+ 8-bit 15-to-1 multiplexer                             : 1
+ 8-bit 2-to-1 multiplexer                              : 5
 # Logic shifters                                       : 3
  16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
@@ -253,20 +313,33 @@ Unit <test_cases_2> synthesized (advanced).
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Adders/Subtractors                                   : 2
+# Multipliers                                          : 1
+ 8x8-bit multiplier                                    : 1
+# Adders/Subtractors                                   : 10
  16-bit adder                                          : 1
  16-bit subtractor                                     : 1
+ 8-bit adder carry in                                  : 8
 # Counters                                             : 1
  28-bit up counter                                     : 1
-# Registers                                            : 23
- Flip-Flops                                            : 23
-# Multiplexers                                         : 12
- 1-bit 2-to-1 multiplexer                              : 1
+# Registers                                            : 4
+ Flip-Flops                                            : 4
+# Comparators                                          : 9
+ 10-bit comparator lessequal                           : 1
+ 11-bit comparator lessequal                           : 1
+ 12-bit comparator lessequal                           : 1
+ 13-bit comparator lessequal                           : 1
+ 14-bit comparator lessequal                           : 1
+ 15-bit comparator lessequal                           : 1
+ 16-bit comparator lessequal                           : 1
+ 8-bit comparator lessequal                            : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 72
+ 1-bit 2-to-1 multiplexer                              : 57
  1-bit 3-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 4
+ 16-bit 2-to-1 multiplexer                             : 5
  16-bit 4-to-1 multiplexer                             : 3
- 8-bit 2-to-1 multiplexer                              : 2
- 8-bit 4-to-1 multiplexer                              : 1
+ 8-bit 15-to-1 multiplexer                             : 1
+ 8-bit 2-to-1 multiplexer                              : 5
 # Logic shifters                                       : 3
  16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
@@ -281,38 +354,46 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
-WARNING:Xst:1710 - FF/Latch <out_0> (without init value) has a constant value of 0 in block <compare_5>. This FF/Latch will be trimmed during the optimization process.
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <tester/FSM_0> on signal <M_state_q[1:2]> with user encoding.
+Optimizing FSM <tester/FSM_0> on signal <M_state_q[1:4]> with user encoding.
 -------------------
  State | Encoding
 -------------------
- 00    | 00
- 10    | 10
- 01    | 01
+ 0000  | 0000
+ 0001  | 0001
+ 0010  | 0010
+ 0011  | 0011
+ 0100  | 0100
+ 0101  | 0101
+ 0110  | 0110
+ 0111  | 0111
+ 1000  | 1000
+ 1001  | 1001
+ 1010  | 1010
+ 1011  | 1011
+ 1100  | 1100
+ 1101  | 1101
 -------------------
-WARNING:Xst:2973 - All outputs of instance <alumodule/compare> of block <compare_5> are unconnected in block <test_cases_2>. Underlying logic will be removed.
-INFO:Xst:2261 - The FF/Latch <M_n_q_0> in Unit <test_cases_2> is equivalent to the following FF/Latch, which will be removed : <M_alu_q_15> 
-INFO:Xst:2261 - The FF/Latch <M_alu_q_0> in Unit <test_cases_2> is equivalent to the following FF/Latch, which will be removed : <M_alu_q_1> 
 
 Optimizing unit <mojo_top_0> ...
 
 Optimizing unit <test_cases_2> ...
-WARNING:Xst:1293 - FF/Latch <tester/M_state_q_FSM_FFd2> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <tester/M_alu_q_11> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <tester/M_alu_q_9> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <tester/M_alu_q_4> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <tester/M_n_q_0> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <tester/M_v_q_0> has a constant value of 0 in block <mojo_top_0>. This FF/Latch will be trimmed during the optimization process.
-INFO:Xst:2261 - The FF/Latch <tester/M_alu_q_14> in Unit <mojo_top_0> is equivalent to the following 5 FFs/Latches, which will be removed : <tester/M_alu_q_13> <tester/M_alu_q_12> <tester/M_alu_q_7> <tester/M_alu_q_3> <tester/M_alu_q_0> 
+
+Optimizing unit <add_5> ...
+
+Optimizing unit <shift_8> ...
+
+Optimizing unit <div_8u_8u> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-INFO:Xst:2261 - The FF/Latch <tester/M_alu_q_14> in Unit <mojo_top_0> is equivalent to the following 5 FFs/Latches, which will be removed : <tester/M_alu_q_10> <tester/M_alu_q_8> <tester/M_alu_q_6> <tester/M_alu_q_5> <tester/M_alu_q_2> 
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 0.
-FlipFlop reset_cond/M_stage_q_3 has been replicated 1 time(s)
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 3.
 
 Final Macro Processing ...
+
+Processing Unit <mojo_top_0> :
+INFO:Xst:741 - HDL ADVISOR - A 4-bit shift register was found for signal <reset_cond/M_stage_q_3> and currently occupies 4 logic cells (2 slices). Removing the set/reset logic would take advantage of SRL32 (and derived) primitives and reduce this to 1 logic cells (1 slices). Evaluate if the set/reset can be removed for this simple shift register. The majority of simple pipeline structures do not need to be set/reset operationally.
+Unit <mojo_top_0> processed.
 
 =========================================================================
 Final Register Report
@@ -342,19 +423,23 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 94
-#      GND                         : 3
-#      INV                         : 3
+# BELS                             : 245
+#      GND                         : 4
+#      INV                         : 2
 #      LUT1                        : 27
-#      LUT2                        : 3
-#      LUT3                        : 1
-#      MUXCY                       : 27
-#      VCC                         : 2
-#      XORCY                       : 28
-# FlipFlops/Latches                : 36
-#      FD                          : 1
-#      FDR                         : 30
-#      FDS                         : 5
+#      LUT2                        : 1
+#      LUT3                        : 9
+#      LUT4                        : 31
+#      LUT5                        : 38
+#      LUT6                        : 41
+#      MUXCY                       : 42
+#      MUXF7                       : 3
+#      VCC                         : 3
+#      XORCY                       : 44
+# FlipFlops/Latches                : 37
+#      FDR                         : 32
+#      FDS                         : 4
+#      LD                          : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
 # IO Buffers                       : 51
@@ -369,16 +454,16 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              36  out of  11440     0%  
- Number of Slice LUTs:                   34  out of   5720     0%  
-    Number used as Logic:                34  out of   5720     0%  
+ Number of Slice Registers:              37  out of  11440     0%  
+ Number of Slice LUTs:                  149  out of   5720     2%  
+    Number used as Logic:               149  out of   5720     2%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:     40
-   Number with an unused Flip Flop:       4  out of     40    10%  
-   Number with an unused LUT:             6  out of     40    15%  
-   Number of fully used LUT-FF pairs:    30  out of     40    75%  
-   Number of unique control sets:         4
+ Number of LUT Flip Flop pairs used:    155
+   Number with an unused Flip Flop:     118  out of    155    76%  
+   Number with an unused LUT:             6  out of    155     3%  
+   Number of fully used LUT-FF pairs:    31  out of    155    20%  
+   Number of unique control sets:         3
 
 IO Utilization: 
  Number of IOs:                          58
@@ -405,11 +490,16 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------+------------------------+-------+
-Clock Signal                       | Clock buffer(FF name)  | Load  |
------------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 36    |
------------------------------------+------------------------+-------+
+--------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+Clock Signal                                                                                            | Clock buffer(FF name)                  | Load  |
+--------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+clk                                                                                                     | BUFGP                                  | 36    |
+tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o(tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o11:O)| NONE(*)(tester/alumodule/compare/out_0)| 1     |
+--------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+(*) This 1 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
 ----------------------------------------
@@ -419,9 +509,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 2.561ns (Maximum Frequency: 390.549MHz)
-   Minimum input arrival time before clock: 3.563ns
-   Maximum output required time after clock: 5.704ns
+   Minimum period: 9.625ns (Maximum Frequency: 103.892MHz)
+   Minimum input arrival time before clock: 3.526ns
+   Maximum output required time after clock: 14.954ns
    Maximum combinational path delay: No path found
 
 Timing Details:
@@ -430,59 +520,44 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 2.561ns (frequency: 390.549MHz)
-  Total number of paths / destination ports: 446 / 65
+  Clock period: 9.625ns (frequency: 103.892MHz)
+  Total number of paths / destination ports: 5472 / 67
 -------------------------------------------------------------------------
-Delay:               2.561ns (Levels of Logic = 29)
-  Source:            tester/M_counter_q_0 (FF)
-  Destination:       tester/M_counter_q_27 (FF)
+Delay:               9.625ns (Levels of Logic = 12)
+  Source:            tester/M_state_q_FSM_FFd1 (FF)
+  Destination:       tester/M_state_q_FSM_FFd4 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: tester/M_counter_q_0 to tester/M_counter_q_27
+  Data Path: tester/M_state_q_FSM_FFd1 to tester/M_state_q_FSM_FFd4
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q              1   0.525   0.681  M_counter_q_0 (M_counter_q_0)
-     INV:I->O              1   0.255   0.000  Mcount_M_counter_q_lut<0>_INV_0 (Mcount_M_counter_q_lut<0>)
-     MUXCY:S->O            1   0.215   0.000  Mcount_M_counter_q_cy<0> (Mcount_M_counter_q_cy<0>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<1> (Mcount_M_counter_q_cy<1>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<2> (Mcount_M_counter_q_cy<2>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<3> (Mcount_M_counter_q_cy<3>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<4> (Mcount_M_counter_q_cy<4>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<5> (Mcount_M_counter_q_cy<5>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<6> (Mcount_M_counter_q_cy<6>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<7> (Mcount_M_counter_q_cy<7>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<8> (Mcount_M_counter_q_cy<8>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<9> (Mcount_M_counter_q_cy<9>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<10> (Mcount_M_counter_q_cy<10>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<11> (Mcount_M_counter_q_cy<11>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<12> (Mcount_M_counter_q_cy<12>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<13> (Mcount_M_counter_q_cy<13>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<14> (Mcount_M_counter_q_cy<14>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<15> (Mcount_M_counter_q_cy<15>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<16> (Mcount_M_counter_q_cy<16>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<17> (Mcount_M_counter_q_cy<17>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<18> (Mcount_M_counter_q_cy<18>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<19> (Mcount_M_counter_q_cy<19>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<20> (Mcount_M_counter_q_cy<20>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<21> (Mcount_M_counter_q_cy<21>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<22> (Mcount_M_counter_q_cy<22>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<23> (Mcount_M_counter_q_cy<23>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<24> (Mcount_M_counter_q_cy<24>)
-     MUXCY:CI->O           1   0.023   0.000  Mcount_M_counter_q_cy<25> (Mcount_M_counter_q_cy<25>)
-     MUXCY:CI->O           0   0.023   0.000  Mcount_M_counter_q_cy<26> (Mcount_M_counter_q_cy<26>)
-     XORCY:CI->O           1   0.206   0.000  Mcount_M_counter_q_xor<27> (Result<27>)
-     FDR:D                     0.074          M_counter_q_27
+     FDR:C->Q             84   0.525   2.313  M_state_q_FSM_FFd1 (M_state_q_FSM_FFd1)
+     LUT3:I0->O            9   0.235   0.975  _n0174<11>11 (_n0174<13>)
+     begin scope: 'tester/alumodule:a<7>'
+     begin scope: 'tester/alumodule/add:a<7>'
+     MUXCY:DI->O           1   0.181   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<0> (Msub_a[15]_b[15]_sub_2_OUT_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<1> (Msub_a[15]_b[15]_sub_2_OUT_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<2> (Msub_a[15]_b[15]_sub_2_OUT_cy<2>)
+     XORCY:CI->O           2   0.206   0.954  Msub_a[15]_b[15]_sub_2_OUT_xor<3> (a[15]_b[15]_sub_2_OUT<3>)
+     end scope: 'tester/alumodule/add:a[15]_b[15]_sub_2_OUT<3>'
+     end scope: 'tester/alumodule:a[15]_b[15]_sub_2_OUT<3>'
+     LUT6:I3->O            1   0.235   0.790  M_state_q_FSM_FFd4-In222 (M_state_q_FSM_FFd4-In221)
+     LUT6:I4->O            2   0.250   1.002  M_state_q_FSM_FFd4-In223 (M_state_q_FSM_FFd4-In222)
+     LUT6:I2->O            2   0.254   1.156  M_state_q_FSM_FFd4-In13_SW0 (N34)
+     LUT6:I1->O            1   0.254   0.000  M_state_q_FSM_FFd4-In17_G (N104)
+     MUXF7:I1->O           1   0.175   0.000  M_state_q_FSM_FFd4-In17 (M_state_q_FSM_FFd4-In)
+     FDR:D                     0.074          M_state_q_FSM_FFd4
     ----------------------------------------
-    Total                      2.561ns (1.880ns logic, 0.681ns route)
-                                       (73.4% logic, 26.6% route)
+    Total                      9.625ns (2.436ns logic, 7.190ns route)
+                                       (25.3% logic, 74.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 5 / 5
+  Total number of paths / destination ports: 4 / 4
 -------------------------------------------------------------------------
-Offset:              3.563ns (Levels of Logic = 3)
+Offset:              3.526ns (Levels of Logic = 3)
   Source:            rst_n (PAD)
   Destination:       reset_cond/M_stage_q_3 (FF)
   Destination Clock: clk rising
@@ -492,33 +567,73 @@ Offset:              3.563ns (Levels of Logic = 3)
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
      IBUF:I->O             1   1.328   0.681  rst_n_IBUF (rst_n_IBUF)
-     INV:I->O              5   0.255   0.840  M_reset_cond_in1_INV_0 (M_reset_cond_in)
+     INV:I->O              4   0.255   0.803  M_reset_cond_in1_INV_0 (M_reset_cond_in)
      begin scope: 'reset_cond:in'
      FDS:S                     0.459          M_stage_q_0
     ----------------------------------------
-    Total                      3.563ns (2.042ns logic, 1.521ns route)
-                                       (57.3% logic, 42.7% route)
+    Total                      3.526ns (2.042ns logic, 1.484ns route)
+                                       (57.9% logic, 42.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 40 / 20
+  Total number of paths / destination ports: 2889 / 24
 -------------------------------------------------------------------------
-Offset:              5.704ns (Levels of Logic = 3)
+Offset:              14.954ns (Levels of Logic = 17)
   Source:            tester/M_state_q_FSM_FFd1 (FF)
-  Destination:       io_led<22> (PAD)
+  Destination:       io_led<7> (PAD)
   Source Clock:      clk rising
 
-  Data Path: tester/M_state_q_FSM_FFd1 to io_led<22>
+  Data Path: tester/M_state_q_FSM_FFd1 to io_led<7>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q              5   0.525   0.949  M_state_q_FSM_FFd1 (M_state_q_FSM_FFd1)
-     LUT2:I0->O           12   0.250   1.068  Mmux_led_alu_211 (led_alu_1<5>)
-     end scope: 'tester:led_alu_1<5>'
-     OBUF:I->O                 2.912          io_led_10_OBUF (io_led<10>)
+     FDR:C->Q             84   0.525   2.313  M_state_q_FSM_FFd1 (M_state_q_FSM_FFd1)
+     LUT3:I0->O            9   0.235   0.975  _n0174<11>11 (_n0174<13>)
+     begin scope: 'tester/alumodule:a<7>'
+     begin scope: 'tester/alumodule/add:a<7>'
+     MUXCY:DI->O           1   0.181   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<0> (Msub_a[15]_b[15]_sub_2_OUT_cy<0>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<1> (Msub_a[15]_b[15]_sub_2_OUT_cy<1>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<2> (Msub_a[15]_b[15]_sub_2_OUT_cy<2>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<3> (Msub_a[15]_b[15]_sub_2_OUT_cy<3>)
+     MUXCY:CI->O           1   0.023   0.000  Msub_a[15]_b[15]_sub_2_OUT_cy<4> (Msub_a[15]_b[15]_sub_2_OUT_cy<4>)
+     XORCY:CI->O           4   0.206   0.804  Msub_a[15]_b[15]_sub_2_OUT_xor<5> (a[15]_b[15]_sub_2_OUT<5>)
+     LUT5:I4->O            1   0.254   0.958  Mmux_sum_intermediate121 (sum_intermediate<5>)
+     LUT6:I2->O            2   0.254   1.181  z1 (z)
+     LUT6:I0->O            2   0.254   1.002  z4 (z<0>)
+     end scope: 'tester/alumodule/add:z<0>'
+     end scope: 'tester/alumodule:z<0>'
+     LUT6:I2->O            1   0.254   0.682  M_state_q_FSM_FFd4-In224 (M_state_q_FSM_FFd4-In_bdd34)
+     LUT2:I1->O            1   0.254   0.682  led_result<7>4_SW0 (N93)
+     LUT6:I5->O            1   0.254   0.681  led_result<7>4 (led_result<7>)
+     end scope: 'tester:led_result<7>'
+     OBUF:I->O                 2.912          io_led_7_OBUF (io_led<7>)
     ----------------------------------------
-    Total                      5.704ns (3.687ns logic, 2.017ns route)
-                                       (64.6% logic, 35.4% route)
+    Total                     14.954ns (5.676ns logic, 9.278ns route)
+                                       (38.0% logic, 62.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o'
+  Total number of paths / destination ports: 7 / 5
+-------------------------------------------------------------------------
+Offset:              6.775ns (Levels of Logic = 5)
+  Source:            tester/alumodule/compare/out_0 (LATCH)
+  Destination:       io_led<7> (PAD)
+  Source Clock:      tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o falling
+
+  Data Path: tester/alumodule/compare/out_0 to io_led<7>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q              13   0.581   1.326  out_0 (out_0)
+     end scope: 'tester/alumodule/compare:out<0>'
+     end scope: 'tester/alumodule:out_0'
+     LUT6:I3->O            1   0.235   0.790  led_result<7>2 (led_result<7>1)
+     LUT6:I4->O            1   0.250   0.681  led_result<7>4 (led_result<7>)
+     end scope: 'tester:led_result<7>'
+     OBUF:I->O                 2.912          io_led_7_OBUF (io_led<7>)
+    ----------------------------------------
+    Total                      6.775ns (3.978ns logic, 2.797ns route)
+                                       (58.7% logic, 41.3% route)
 
 =========================================================================
 
@@ -526,24 +641,33 @@ Cross Clock Domains Report:
 --------------------------
 
 Clock to Setup on destination clock clk
+-------------------------------------------------+---------+---------+---------+---------+
+                                                 | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                                     |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+-------------------------------------------------+---------+---------+---------+---------+
+clk                                              |    9.625|         |         |         |
+tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o|         |    4.944|         |         |
+-------------------------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    2.561|         |         |         |
+clk            |         |         |    9.704|         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.96 secs
+Total REAL time to Xst completion: 6.00 secs
+Total CPU time to Xst completion: 5.60 secs
  
 --> 
 
-Total memory usage is 4509160 kilobytes
+Total memory usage is 4510888 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   28 (   0 filtered)
-Number of infos    :    4 (   0 filtered)
+Number of warnings :   22 (   0 filtered)
+Number of infos    :    2 (   0 filtered)
 

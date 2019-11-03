@@ -8,40 +8,40 @@ Target Device  : xc6slx9
 Target Package : tqg144
 Target Speed   : -2
 Mapper Version : spartan6 -- $Revision: 1.55 $
-Mapped Date    : Sun Nov 03 00:28:21 2019
+Mapped Date    : Sun Nov 03 23:18:00 2019
 
 Design Summary
 --------------
 Number of errors:      0
-Number of warnings:    6
+Number of warnings:    7
 Slice Logic Utilization:
-  Number of Slice Registers:                    36 out of  11,440    1%
+  Number of Slice Registers:                    37 out of  11,440    1%
     Number used as Flip Flops:                  36
-    Number used as Latches:                      0
+    Number used as Latches:                      1
     Number used as Latch-thrus:                  0
     Number used as AND/OR logics:                0
-  Number of Slice LUTs:                         33 out of   5,720    1%
-    Number used as logic:                       30 out of   5,720    1%
-      Number using O6 output only:               1
+  Number of Slice LUTs:                        135 out of   5,720    2%
+    Number used as logic:                      133 out of   5,720    2%
+      Number using O6 output only:              83
       Number using O5 output only:              26
-      Number using O5 and O6:                    3
+      Number using O5 and O6:                   24
       Number used as ROM:                        0
     Number used as Memory:                       0 out of   1,440    0%
-    Number used exclusively as route-thrus:      3
-      Number with same-slice register load:      2
+    Number used exclusively as route-thrus:      2
+      Number with same-slice register load:      1
       Number with same-slice carry load:         1
       Number with other load:                    0
 
 Slice Logic Distribution:
-  Number of occupied Slices:                    11 out of   1,430    1%
-  Number of MUXCYs used:                        28 out of   2,860    1%
-  Number of LUT Flip Flop pairs used:           34
-    Number with an unused Flip Flop:             0 out of      34    0%
-    Number with an unused LUT:                   1 out of      34    2%
-    Number of fully used LUT-FF pairs:          33 out of      34   97%
-    Number of unique control sets:               4
+  Number of occupied Slices:                    53 out of   1,430    3%
+  Number of MUXCYs used:                        44 out of   2,860    1%
+  Number of LUT Flip Flop pairs used:          137
+    Number with an unused Flip Flop:           101 out of     137   73%
+    Number with an unused LUT:                   2 out of     137    1%
+    Number of fully used LUT-FF pairs:          34 out of     137   24%
+    Number of unique control sets:               3
     Number of slice register sites lost
-      to control set restrictions:              20 out of  11,440    1%
+      to control set restrictions:              11 out of  11,440    1%
 
   A LUT Flip Flop pair for this architecture represents one LUT paired with
   one Flip Flop within a slice.  A control set is a unique combination of
@@ -51,7 +51,7 @@ Slice Logic Distribution:
 
 IO Utilization:
   Number of bonded IOBs:                        52 out of     102   50%
-    Number of LOCed IOBs:                       16 out of      52   30%
+    Number of LOCed IOBs:                       52 out of      52  100%
 
 Specific Feature Utilization:
   Number of RAMB16BWERs:                         0 out of      32    0%
@@ -78,11 +78,11 @@ Specific Feature Utilization:
   Number of STARTUPs:                            0 out of       1    0%
   Number of SUSPEND_SYNCs:                       0 out of       1    0%
 
-Average Fanout of Non-Clock Nets:                1.94
+Average Fanout of Non-Clock Nets:                3.80
 
-Peak Memory Usage:  4489 MB
-Total REAL time to MAP completion:  7 secs 
-Total CPU time to MAP completion (all processors):   6 secs 
+Peak Memory Usage:  4492 MB
+Total REAL time to MAP completion:  5 secs 
+Total CPU time to MAP completion (all processors):   5 secs 
 
 Table of Contents
 -----------------
@@ -117,6 +117,10 @@ WARNING:MapLib:701 - Signal spi_miso connected to top level port spi_miso has
    been removed.
 WARNING:MapLib:701 - Signal avr_rx connected to top level port avr_rx has been
    removed.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
 
 Section 3 - Informational
 -------------------------
@@ -142,15 +146,12 @@ INFO:Pack:1720 - Initializing voltage to 1.140 Volts. (default - Range: 1.140 to
    1.260 Volts)
 INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
    (.mrp).
-INFO:Place:834 - Only a subset of IOs are locked. Out of 52 IOs, 16 are locked
-   and 36 are not locked. If you would like to print the names of these IOs,
-   please set the environment variable XIL_PAR_DESIGN_CHECK_VERBOSE to 1. 
 INFO:Pack:1650 - Map created a placed design.
 
 Section 4 - Removed Logic Summary
 ---------------------------------
   12 block(s) removed
-   5 block(s) optimized away
+   7 block(s) optimized away
    6 signal(s) removed
 
 Section 5 - Removed Logic
@@ -187,6 +188,8 @@ VCC 		XST_VCC
 GND 		reset_cond/XST_GND
 GND 		tester/XST_GND
 VCC 		tester/XST_VCC
+GND 		tester/alumodule/add/XST_GND
+VCC 		tester/alumodule/add/XST_VCC
 
 To enable printing of redundant blocks removed and signals merged, set the
 detailed map report option and rerun map.
@@ -202,42 +205,42 @@ Section 6 - IOB Properties
 | avr_tx                             | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
 | cclk                               | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
 | clk                                | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
-| io_led[0]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[1]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[2]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[3]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[4]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[5]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[6]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[7]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[8]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[9]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[10]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[11]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[12]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[13]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[14]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[15]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[16]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[17]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[18]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[19]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[20]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[21]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[22]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_led[23]                         | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[0]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[1]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[2]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[3]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[4]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[5]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[6]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_seg[7]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_sel[0]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_sel[1]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_sel[2]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
-| io_sel[3]                          | IOB              | OUTPUT    | LVCMOS25             |       | 12       | SLOW |              |          |          |
+| io_led[0]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[1]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[2]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[3]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[4]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[5]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[6]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[7]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[8]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[9]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[10]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[11]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[12]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[13]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[14]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[15]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[16]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[17]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[18]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[19]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[20]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[21]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[22]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_led[23]                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[0]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[1]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[2]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[3]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[4]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[5]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[6]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_seg[7]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_sel[0]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_sel[1]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_sel[2]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| io_sel[3]                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
 | led[0]                             | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
 | led[1]                             | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
 | led[2]                             | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |

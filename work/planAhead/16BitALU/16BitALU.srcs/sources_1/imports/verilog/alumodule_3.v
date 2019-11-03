@@ -25,7 +25,7 @@ module alumodule_3 (
   reg [6-1:0] M_add_alufn;
   reg [16-1:0] M_add_a;
   reg [16-1:0] M_add_b;
-  add_4 add (
+  add_5 add (
     .clk(clk),
     .rst(rst),
     .alufn(M_add_alufn),
@@ -41,7 +41,7 @@ module alumodule_3 (
   reg [1-1:0] M_compare_z;
   reg [1-1:0] M_compare_v;
   reg [1-1:0] M_compare_n;
-  compare_5 compare (
+  compare_6 compare (
     .clk(clk),
     .rst(rst),
     .alufn(M_compare_alufn),
@@ -54,7 +54,7 @@ module alumodule_3 (
   reg [6-1:0] M_boolean_alufn;
   reg [16-1:0] M_boolean_a;
   reg [16-1:0] M_boolean_b;
-  boolean_6 boolean (
+  boolean_7 boolean (
     .clk(clk),
     .rst(rst),
     .alufn(M_boolean_alufn),
@@ -66,7 +66,7 @@ module alumodule_3 (
   reg [6-1:0] M_shift_alufn;
   reg [16-1:0] M_shift_a;
   reg [16-1:0] M_shift_b;
-  shift_7 shift (
+  shift_8 shift (
     .clk(clk),
     .rst(rst),
     .alufn(M_shift_alufn),

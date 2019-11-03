@@ -15,15 +15,22 @@ module test_cases_2 (
   
   
   reg [27:0] M_counter_d, M_counter_q = 1'h0;
-  localparam ADD_state = 2'd0;
-  localparam SUBTRACT_state = 2'd1;
-  localparam ERROR_state = 2'd2;
+  localparam ADD_state = 4'd0;
+  localparam SUBTRACT_state = 4'd1;
+  localparam MULTIPLY_state = 4'd2;
+  localparam DIVIDE_state = 4'd3;
+  localparam AND_state = 4'd4;
+  localparam OR_state = 4'd5;
+  localparam XOR_state = 4'd6;
+  localparam A_state = 4'd7;
+  localparam SHL_state = 4'd8;
+  localparam SHR_state = 4'd9;
+  localparam SRA_state = 4'd10;
+  localparam CMPEQ_state = 4'd11;
+  localparam CMPLT_state = 4'd12;
+  localparam CMPLE_state = 4'd13;
   
-  reg [1:0] M_state_d, M_state_q = ADD_state;
-  reg [15:0] M_alu_d, M_alu_q = 1'h0;
-  reg [0:0] M_z_d, M_z_q = 1'h0;
-  reg [0:0] M_v_d, M_v_q = 1'h0;
-  reg [0:0] M_n_d, M_n_q = 1'h0;
+  reg [3:0] M_state_d, M_state_q = ADD_state;
   wire [16-1:0] M_alumodule_alu;
   wire [1-1:0] M_alumodule_z;
   wire [1-1:0] M_alumodule_v;
@@ -42,28 +49,52 @@ module test_cases_2 (
     .v(M_alumodule_v),
     .n(M_alumodule_n)
   );
+  wire [16-1:0] M_multiply_mul;
+  reg [8-1:0] M_multiply_a;
+  reg [8-1:0] M_multiply_b;
+  reg [1-1:0] M_multiply_in;
+  multiply_4 multiply (
+    .clk(clk),
+    .rst(rst),
+    .a(M_multiply_a),
+    .b(M_multiply_b),
+    .in(M_multiply_in),
+    .mul(M_multiply_mul)
+  );
   
   reg [15:0] expected_alu;
   
+  reg [15:0] alu;
+  
+  reg [0:0] z;
+  
+  reg [0:0] v;
+  
+  reg [0:0] n;
+  
+  reg [15:0] expected_mul;
+  
+  reg [15:0] out_mul;
+  
   always @* begin
     M_state_d = M_state_q;
-    M_v_d = M_v_q;
-    M_alu_d = M_alu_q;
     M_counter_d = M_counter_q;
-    M_n_d = M_n_q;
-    M_z_d = M_z_q;
     
     M_counter_d = M_counter_q + 1'h1;
     led_result = 8'h00;
     led_alu_1 = 8'h00;
     led_alu_2 = 8'h00;
-    M_alu_d = M_alumodule_alu;
-    M_z_d = M_alumodule_z;
-    M_v_d = M_alumodule_v;
-    M_n_d = M_alumodule_n;
+    alu = M_alumodule_alu;
+    z = M_alumodule_z;
+    v = M_alumodule_v;
+    n = M_alumodule_n;
+    out_mul = M_multiply_mul;
     M_alumodule_a = 16'h0000;
     M_alumodule_b = 16'h0000;
     M_alumodule_alufn = 6'h00;
+    M_multiply_a = 8'h00;
+    M_multiply_b = 8'h00;
+    M_multiply_in = 1'h0;
     
     case (M_state_q)
       ADD_state: begin
@@ -71,15 +102,13 @@ module test_cases_2 (
         M_alumodule_a = 16'h55ab;
         M_alumodule_b = 16'h2044;
         expected_alu = 16'h75ef;
-        led_alu_1 = M_alu_q[0+7-:8];
-        led_alu_2 = M_alu_q[8+7-:8];
-        if (M_alu_q == expected_alu & M_z_q == 1'h0 & M_v_q == 1'h0 & M_n_q == 1'h0) begin
-          led_result = 8'h00;
-          if (M_counter_q[27+0-:1] == 1'h0) begin
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu & z == 1'h0 & v == 1'h0 & n == 1'h0) begin
+          led_result = 8'h80;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
             M_state_d = SUBTRACT_state;
           end
-        end else begin
-          M_state_d = ERROR_state;
         end
       end
       SUBTRACT_state: begin
@@ -87,20 +116,181 @@ module test_cases_2 (
         M_alumodule_a = 16'h95ab;
         M_alumodule_b = 16'h8044;
         expected_alu = 16'h1567;
-        led_alu_1 = M_alu_q[0+7-:8];
-        led_alu_2 = M_alu_q[8+7-:8];
-        if (M_alu_q == expected_alu & M_z_q == 1'h0 & M_v_q == 1'h1 & M_n_q == 1'h0) begin
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu & z == 1'h0 & v == 1'h1 & n == 1'h0) begin
           led_result = 8'h40;
-          if (M_counter_q[27+0-:1] == 1'h1) begin
-            M_state_d = ADD_state;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = MULTIPLY_state;
           end
-        end else begin
-          M_state_d = ERROR_state;
         end
       end
-      ERROR_state: begin
-        if (M_counter_q[27+0-:1] == 1'h1) begin
-          led_result = 8'hff;
+      MULTIPLY_state: begin
+        M_multiply_a = 8'h3f;
+        M_multiply_b = 8'h03;
+        M_multiply_in = 1'h0;
+        expected_mul = 16'h00bd;
+        led_alu_1 = M_multiply_mul[0+7-:8];
+        led_alu_2 = M_multiply_mul[8+7-:8];
+        if (out_mul == expected_mul) begin
+          led_result = 8'h20;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = DIVIDE_state;
+          end
+        end
+      end
+      DIVIDE_state: begin
+        M_multiply_a = 8'h3f;
+        M_multiply_b = 8'h03;
+        M_multiply_in = 1'h1;
+        expected_mul = 16'h0015;
+        led_alu_1 = M_multiply_mul[0+7-:8];
+        led_alu_2 = M_multiply_mul[8+7-:8];
+        if (out_mul == expected_mul) begin
+          led_result = 8'h10;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = AND_state;
+          end
+        end
+      end
+      AND_state: begin
+        M_alumodule_alufn = 6'h18;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h8000;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h08;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = OR_state;
+          end
+        end
+      end
+      OR_state: begin
+        M_alumodule_alufn = 6'h1e;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h95ef;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h04;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = XOR_state;
+          end
+        end
+      end
+      XOR_state: begin
+        M_alumodule_alufn = 6'h16;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h15ef;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h02;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = A_state;
+          end
+        end
+      end
+      A_state: begin
+        M_alumodule_alufn = 6'h1a;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h95ab;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h01;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = SHL_state;
+          end
+        end
+      end
+      SHL_state: begin
+        M_alumodule_alufn = 6'h20;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h0001;
+        expected_alu = 16'h2b56;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'hc0;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = SHR_state;
+          end
+        end
+      end
+      SHR_state: begin
+        M_alumodule_alufn = 6'h21;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h0001;
+        expected_alu = 16'h4ad5;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'ha0;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = SRA_state;
+          end
+        end
+      end
+      SRA_state: begin
+        M_alumodule_alufn = 6'h23;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h0001;
+        expected_alu = 16'hcad5;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h90;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = CMPEQ_state;
+          end
+        end
+      end
+      CMPEQ_state: begin
+        M_alumodule_alufn = 6'h33;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h0000;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h88;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = CMPLT_state;
+          end
+        end
+      end
+      CMPLT_state: begin
+        M_alumodule_alufn = 6'h35;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h0001;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h84;
+          if (M_counter_q[27+0-:1] == 1'h1) begin
+            M_state_d = CMPLE_state;
+          end
+        end
+      end
+      CMPLE_state: begin
+        M_alumodule_alufn = 6'h35;
+        M_alumodule_a = 16'h95ab;
+        M_alumodule_b = 16'h8044;
+        expected_alu = 16'h0001;
+        led_alu_1 = alu[0+7-:8];
+        led_alu_2 = alu[8+7-:8];
+        if (alu == expected_alu) begin
+          led_result = 8'h82;
+          if (M_counter_q[27+0-:1] == 1'h0) begin
+            M_state_d = ADD_state;
+          end
         end
       end
     endcase
@@ -109,17 +299,9 @@ module test_cases_2 (
   always @(posedge clk) begin
     if (rst == 1'b1) begin
       M_counter_q <= 1'h0;
-      M_alu_q <= 1'h0;
-      M_z_q <= 1'h0;
-      M_v_q <= 1'h0;
-      M_n_q <= 1'h0;
       M_state_q <= 1'h0;
     end else begin
       M_counter_q <= M_counter_d;
-      M_alu_q <= M_alu_d;
-      M_z_q <= M_z_d;
-      M_v_q <= M_v_d;
-      M_n_q <= M_n_d;
       M_state_q <= M_state_d;
     end
   end

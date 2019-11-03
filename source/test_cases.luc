@@ -12,17 +12,20 @@ module test_cases (
       //edge_detector edge_detector(#RISE(1), #FALL(0));
     
   .rst(rst) {
-    dff counter[28];     // time taken for each cycle is 2^28/50E6
-    fsm state = {ADD, SUBTRACT, ERROR};
-    dff alu[16];
-    dff z[1];
-    dff v[1];
-    dff n[1];
+    dff counter[28];     // time taken for each cycle is 2^28/50E6
+    fsm state = {ADD, SUBTRACT, MULTIPLY, DIVIDE, AND, OR, XOR, A, SHL, SHR, SRA, CMPEQ, CMPLT, CMPLE};
     alumodule alumodule;
-  }
+    multiply multiply;
+    }
   }
     
 sig expected_alu[16];
+sig alu[16];
+sig z[1];
+sig v[1];
+sig n[1];
+sig expected_mul[16];
+sig out_mul[16];
   
   always {
     // initialise
@@ -31,15 +34,18 @@ sig expected_alu[16];
     led_alu_1 = 8b00000000;
     led_alu_2 = 8b00000000;
 
-    alu.d = alumodule.alu;
-    z.d = alumodule.z;
-    v.d = alumodule.v;
-    n.d = alumodule.n;
+    alu = alumodule.alu;
+    z = alumodule.z;
+    v = alumodule.v;
+    n = alumodule.n;
+    out_mul = multiply.mul;
+    
     alumodule.a = 16b0000000000000000;
     alumodule.b = 16b0000000000000000;
     alumodule.alufn = 6b000000;
-   
-    
+    multiply.a = 8b00000000;
+    multiply.b = 8b00000000;
+    multiply.in = 1b0;
       
     case (state.q){
       state.ADD:
@@ -48,20 +54,20 @@ sig expected_alu[16];
         alumodule.b = 16b0010000001000100;
         
         expected_alu = 16b0111010111101111;
-        led_alu_1 = alu.q[7:0];
-        led_alu_2 = alu.q[15:8];
+        led_alu_1 = alu[7:0];
+        led_alu_2 = alu[15:8];
         
         
-        if (alu.q == expected_alu & z.q == 0 & v.q == 0 & n.q == 0){
-            led_result = 8b00000000;
+        if (alu == expected_alu & z == 0 & v == 0 & n == 0){
+            led_result = 8b10000000;
             
-            if (counter.q[27] == 0){
+            if (counter.q[27] == 1){
               state.d = state.SUBTRACT;
                 }
             }
-       else {
-            state.d = state.ERROR;
-            }
+      //  else {
+      //       state.d = state.ERROR;
+      //       }
             
       state.SUBTRACT:
           alumodule.alufn = 6b000001;
@@ -69,28 +75,235 @@ sig expected_alu[16];
           alumodule.b = 16b1000000001000100;
             
           expected_alu = 16b01010101100111;
-          led_alu_1 = alu.q[7:0];
-          led_alu_2 = alu.q[15:8];
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
 
           
-          if (alu.q == expected_alu & z.q == 0 & v.q == 1 & n.q == 0){
+          if (alu == expected_alu & z == 0 & v == 1 & n == 0){
             led_result = 8b01000000;
              
-            if (counter.q[27] == 1){
-              state.d = state.ADD;
+            if (counter.q[27] == 0){
+              state.d = state.MULTIPLY;
                 }
             }
-          else {
-            state.d = state.ERROR;
-            } 
-            
-      state.ERROR:
+        
+      state.MULTIPLY:
+        multiply.a = 8b00111111;
+        multiply.b = 8b00000011;
+        multiply.in = 1b0; // multiply
+        
+        expected_mul = 16b0000000010111101;
+        
+        led_alu_1 = multiply.mul[7:0];
+        led_alu_2 = multiply.mul[15:8];
+        
+        if (out_mul == expected_mul){
+          led_result = 8b00100000;
+          
           if (counter.q[27] == 1){
-          led_result = 8b11111111;
+            state.d = state.DIVIDE;
+          }
+        }
+        
+      state.DIVIDE:
+        multiply.a = 8b00111111;
+        multiply.b = 8b00000011;
+        multiply.in = 1b1; // divide
+        
+        expected_mul = 16b0000000000010101;
+        
+        led_alu_1 = multiply.mul[7:0];
+        led_alu_2 = multiply.mul[15:8];
+        
+        if (out_mul == expected_mul){
+          led_result = 8b00010000;
+          
+          if (counter.q[27] == 0){
+            state.d = state.AND;
+          }
+        }
+      
+      state.AND:
+          alumodule.alufn = 6b011000;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b1000000000000000;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b00001000;
+             
+            if (counter.q[27] == 1){
+              state.d = state.OR;
+                }
+            }
+        
+      state.OR:
+          alumodule.alufn = 6b011110;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b1001010111101111;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b00000100;
+             
+            if (counter.q[27] == 0){
+              state.d = state.XOR;
+                }
+            }
+        
+      state.XOR:
+          alumodule.alufn = 6b010110;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b0001010111101111;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b00000010;
+             
+            if (counter.q[27] == 1){
+              state.d = state.A;
+                }
+            }
+        
+      state.A:
+          alumodule.alufn = 6b011010;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b1001010110101011;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b00000001;
+             
+            if (counter.q[27] == 0){
+              state.d = state.SHL;
+                }
+            }
+        
+      state.SHL:
+          alumodule.alufn = 6b100000;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b0000000000000001;
+            
+          expected_alu = 16b0010101101010110;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b11000000;
+             
+            if (counter.q[27] == 1){
+              state.d = state.SHR;
+                }
+            }
+        
+      state.SHR:
+          alumodule.alufn = 6b100001;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b0000000000000001;
+            
+          expected_alu = 16b0100101011010101;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b10100000;
+             
+            if (counter.q[27] == 0){
+              state.d = state.SRA;
+                }
+            }
+        
+      state.SRA:
+          alumodule.alufn = 6b100011;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b0000000000000001;
+            
+          expected_alu = 16b1100101011010101;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b10010000;
+             
+            if (counter.q[27] == 1){
+              state.d = state.CMPEQ;
+                }
+            }
+        
+      state.CMPEQ:
+          alumodule.alufn = 6b110011;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b0000000000000000;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b10001000;
+             
+            if (counter.q[27] == 0){
+              state.d = state.CMPLT;
+                }
+            }
+        
+      state.CMPLT:
+          alumodule.alufn = 6b110101;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b0000000000000001;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b10000100;
+             
+            if (counter.q[27] == 1){
+              state.d = state.CMPLE;
+                }
+            }
+        
+      state.CMPLE:
+          alumodule.alufn = 6b110101;
+          alumodule.a = 16b1001010110101011;
+          alumodule.b = 16b1000000001000100;
+            
+          expected_alu = 16b0000000000000001;
+          led_alu_1 = alu[7:0];
+          led_alu_2 = alu[15:8];
+
+          
+          if (alu == expected_alu){
+            led_result = 8b10000010;
+             
+            if (counter.q[27] == 0){
+              state.d = state.ADD;
+                }
             }
         }
      
         
     }
   }
-

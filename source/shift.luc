@@ -7,9 +7,11 @@ module shift (
     input b[16],
     output out[16]
 ) { 
+
   
 always {
 
+    
   case(alufn[1:0]) {
     b00:
       out = a << b; // shift left

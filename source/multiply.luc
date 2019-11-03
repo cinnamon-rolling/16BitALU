@@ -1,34 +1,20 @@
-module multipply (
+module multiply (
     input clk,
     input rst,
     input a[8],                            //defining inputs and outputs of module
     input b[8],
+    input in[1],
     output mul[16]
   ) {
   
-  sig pp0[8];
-  sig pp1[8];
-  sig pp2[8];
-  sig pp3[8];
-  sig pp4[8];
-  sig pp5[8];
-  sig pp6[8];
-  sig pp7[8];
-
-  
   always {
-   
-   pp0[7:0] = (8x{a[0]}) & (b[7:0]);         //apply multiplication based on ppartial pproducts for binary base by shifting bits
-   pp1[7:0] = ((8x{a[1]}) & (b[7:0])) << 1;
-   pp2[7:0] = ((8x{a[2]}) & (b[7:0])) << 2;
-   pp3[7:0] = ((8x{a[3]}) & (b[7:0])) << 3;
-   pp4[7:0] = ((8x{a[4]}) & (b[7:0])) << 4;
-   pp5[7:0] = ((8x{a[5]}) & (b[7:0])) << 5;
-   pp6[7:0] = ((8x{a[6]}) & (b[7:0])) << 6;
-   pp7[7:0] = ((8x{a[7]}) & (b[7:0])) << 7;
-    
-    
-   mul = pp0 + pp1 + pp2 + pp3 + pp4 + pp5 + pp6 + pp7;
+  
+  case (in[0]){
+  0: mul = a * b;
+  1: mul = a / b;
+  default: mul = a * b;
+  
+    }
    
   }
 }

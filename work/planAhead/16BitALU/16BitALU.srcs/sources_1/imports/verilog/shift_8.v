@@ -4,30 +4,31 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module compare_5 (
+module shift_8 (
     input clk,
     input rst,
     input [5:0] alufn,
-    input z,
-    input v,
-    input n,
+    input [15:0] a,
+    input [15:0] b,
     output reg [15:0] out
   );
   
   
   
   always @* begin
-    out[1+14-:15] = 15'h0000;
     
-    case (alufn[1+1-:2])
-      2'h1: begin
-        out[0+0-:1] = z;
+    case (alufn[0+1-:2])
+      2'h0: begin
+        out = a << b;
       end
-      2'h2: begin
-        out[0+0-:1] = n ^ v;
+      2'h1: begin
+        out = a >> b;
       end
       2'h3: begin
-        out[0+0-:1] = z | (n ^ v);
+        out = $signed(a) >>> b;
+      end
+      default: begin
+        out = a << b;
       end
     endcase
   end
