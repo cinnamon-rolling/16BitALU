@@ -7,6 +7,7 @@
 module test_cases_2 (
     input clk,
     input rst,
+    input [0:0] toggle_dip,
     output reg [7:0] led_result,
     output reg [7:0] led_alu_1,
     output reg [7:0] led_alu_2
@@ -31,6 +32,10 @@ module test_cases_2 (
   localparam CMPLE_state = 4'd13;
   
   reg [3:0] M_state_d, M_state_q = ADD_state;
+  localparam TRUE_toggle = 1'd0;
+  localparam FALSE_toggle = 1'd1;
+  
+  reg M_toggle_d, M_toggle_q = TRUE_toggle;
   wire [16-1:0] M_alumodule_alu;
   wire [1-1:0] M_alumodule_z;
   wire [1-1:0] M_alumodule_v;
@@ -77,6 +82,7 @@ module test_cases_2 (
   reg [15:0] out_mul;
   
   always @* begin
+    M_toggle_d = M_toggle_q;
     M_state_d = M_state_q;
     M_counter_d = M_counter_q;
     
@@ -95,6 +101,24 @@ module test_cases_2 (
     M_multiply_a = 8'h00;
     M_multiply_b = 8'h00;
     M_multiply_in = 1'h0;
+    
+    case (toggle_dip)
+      1'h0: begin
+        M_toggle_d = TRUE_toggle;
+      end
+      1'h1: begin
+        M_toggle_d = FALSE_toggle;
+      end
+    endcase
+    
+    case (M_toggle_q)
+      TRUE_toggle: begin
+        alu = alu;
+      end
+      FALSE_toggle: begin
+        alu = 16'hc000;
+      end
+    endcase
     
     case (M_state_q)
       ADD_state: begin
@@ -300,9 +324,11 @@ module test_cases_2 (
     if (rst == 1'b1) begin
       M_counter_q <= 1'h0;
       M_state_q <= 1'h0;
+      M_toggle_q <= 1'h0;
     end else begin
       M_counter_q <= M_counter_d;
       M_state_q <= M_state_d;
+      M_toggle_q <= M_toggle_d;
     end
   end
   

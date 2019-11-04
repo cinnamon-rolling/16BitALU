@@ -17,6 +17,7 @@ module mojo_top_0 (
     input avr_tx,
     output reg avr_rx,
     input avr_rx_busy,
+    input [23:0] io_dip,
     output reg [23:0] io_led,
     output reg [7:0] io_seg,
     output reg [3:0] io_sel
@@ -36,9 +37,11 @@ module mojo_top_0 (
   wire [8-1:0] M_tester_led_result;
   wire [8-1:0] M_tester_led_alu_1;
   wire [8-1:0] M_tester_led_alu_2;
+  reg [1-1:0] M_tester_toggle_dip;
   test_cases_2 tester (
     .clk(clk),
     .rst(rst),
+    .toggle_dip(M_tester_toggle_dip),
     .led_result(M_tester_led_result),
     .led_alu_1(M_tester_led_alu_1),
     .led_alu_2(M_tester_led_alu_2)
@@ -57,5 +60,6 @@ module mojo_top_0 (
     io_led[0+7-:8] = M_tester_led_result;
     io_led[8+7-:8] = M_tester_led_alu_1;
     io_led[16+7-:8] = M_tester_led_alu_2;
+    M_tester_toggle_dip = io_dip[0+0+0-:1];
   end
 endmodule

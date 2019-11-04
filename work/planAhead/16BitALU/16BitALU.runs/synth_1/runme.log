@@ -54,18 +54,19 @@ Elaborating module <multiply_4>.
 
 Synthesizing Unit <mojo_top_0>.
     Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/mojo_top_0.v".
+WARNING:Xst:647 - Input <io_dip<23:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <cclk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_ss> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_mosi> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_sck> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_tx> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 1-bit tristate buffer for signal <spi_miso> created at line 47
-    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 47
-    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 47
-    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 47
-    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 47
-    Found 1-bit tristate buffer for signal <avr_rx> created at line 47
+    Found 1-bit tristate buffer for signal <spi_miso> created at line 50
+    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 50
+    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 50
+    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 50
+    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 50
+    Found 1-bit tristate buffer for signal <avr_rx> created at line 50
     Summary:
 	inferred   6 Tristate(s).
 Unit <mojo_top_0> synthesized.
@@ -80,6 +81,7 @@ Unit <reset_conditioner_1> synthesized.
 Synthesizing Unit <test_cases_2>.
     Related source file is "D:/SUTD/term 4 sophomore/50.002 Computer Structure/1D/game design/code/ALU/16BitALU/work/planAhead/16BitALU/16BitALU.srcs/sources_1/imports/verilog/test_cases_2.v".
     Found 4-bit register for signal <M_state_q>.
+    Found 1-bit register for signal <M_toggle_q>.
     Found 28-bit register for signal <M_counter_q>.
     Found finite state machine <FSM_0> for signal <M_state_q>.
     -----------------------------------------------------------------------
@@ -95,12 +97,12 @@ Synthesizing Unit <test_cases_2>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 28-bit adder for signal <M_counter_d> created at line 83.
-    Found 8-bit 15-to-1 multiplexer for signal <led_result> created at line 99.
+    Found 28-bit adder for signal <M_counter_d> created at line 89.
+    Found 8-bit 15-to-1 multiplexer for signal <led_result> created at line 123.
     Summary:
 	inferred   1 Adder/Subtractor(s).
-	inferred  28 D-type flip-flop(s).
-	inferred   5 Multiplexer(s).
+	inferred  29 D-type flip-flop(s).
+	inferred   6 Multiplexer(s).
 	inferred   1 Finite State Machine(s).
 Unit <test_cases_2> synthesized.
 
@@ -219,7 +221,8 @@ Macro Statistics
  16-bit subtractor                                     : 1
  28-bit adder                                          : 1
  9-bit adder                                           : 2
-# Registers                                            : 2
+# Registers                                            : 3
+ 1-bit register                                        : 1
  28-bit register                                       : 1
  4-bit register                                        : 1
 # Latches                                              : 1
@@ -234,10 +237,10 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 72
+# Multiplexers                                         : 73
  1-bit 2-to-1 multiplexer                              : 57
  1-bit 3-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 5
+ 16-bit 2-to-1 multiplexer                             : 6
  16-bit 4-to-1 multiplexer                             : 3
  8-bit 15-to-1 multiplexer                             : 1
  8-bit 2-to-1 multiplexer                              : 5
@@ -275,8 +278,8 @@ Macro Statistics
  8-bit adder carry in                                  : 8
 # Counters                                             : 1
  28-bit up counter                                     : 1
-# Registers                                            : 4
- Flip-Flops                                            : 4
+# Registers                                            : 5
+ Flip-Flops                                            : 5
 # Comparators                                          : 9
  10-bit comparator lessequal                           : 1
  11-bit comparator lessequal                           : 1
@@ -287,10 +290,10 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 72
+# Multiplexers                                         : 73
  1-bit 2-to-1 multiplexer                              : 57
  1-bit 3-to-1 multiplexer                              : 1
- 16-bit 2-to-1 multiplexer                             : 5
+ 16-bit 2-to-1 multiplexer                             : 6
  16-bit 4-to-1 multiplexer                             : 3
  8-bit 15-to-1 multiplexer                             : 1
  8-bit 2-to-1 multiplexer                              : 5
@@ -341,7 +344,13 @@ Optimizing unit <div_8u_8u> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 3.
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 4.
+FlipFlop tester/M_state_q_FSM_FFd1 has been replicated 4 time(s)
+FlipFlop tester/M_state_q_FSM_FFd2 has been replicated 4 time(s)
+FlipFlop tester/M_state_q_FSM_FFd3 has been replicated 4 time(s)
+FlipFlop tester/M_state_q_FSM_FFd4 has been replicated 1 time(s)
+FlipFlop tester/M_toggle_q has been replicated 1 time(s)
+INFO:Xst:1843 - HDL ADVISOR - FlipFlop tester/M_toggle_q connected to a primary input has been replicated
 
 Final Macro Processing ...
 
@@ -353,8 +362,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 36
- Flip-Flops                                            : 36
+# Registers                                            : 51
+ Flip-Flops                                            : 51
 
 =========================================================================
 
@@ -375,12 +384,12 @@ Partition Implementation Status
 
 Clock Information:
 ------------------
---------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
-Clock Signal                                                                                            | Clock buffer(FF name)                  | Load  |
---------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
-clk                                                                                                     | BUFGP                                  | 36    |
-tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o(tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o11:O)| NONE(*)(tester/alumodule/compare/out_0)| 1     |
---------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+-------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+Clock Signal                                                                                           | Clock buffer(FF name)                  | Load  |
+-------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
+clk                                                                                                    | BUFGP                                  | 51    |
+tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o(tester/alumodule/compare/alufn[2]_PWR_8_o_Mux_2_o1:O)| NONE(*)(tester/alumodule/compare/out_0)| 1     |
+-------------------------------------------------------------------------------------------------------+----------------------------------------+-------+
 (*) This 1 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
 Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
@@ -394,9 +403,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 9.625ns (Maximum Frequency: 103.892MHz)
+   Minimum period: 9.271ns (Maximum Frequency: 107.866MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 14.954ns
+   Maximum output required time after clock: 13.206ns
    Maximum combinational path delay: No path found
 
 =========================================================================

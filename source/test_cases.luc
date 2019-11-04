@@ -1,6 +1,7 @@
 module test_cases (
     input clk,  // clock
     input rst,  // reset
+    input toggle_dip[1], // toggle output to be correct or wrong
     
     // outputs
     output led_result[8],
@@ -14,6 +15,7 @@ module test_cases (
   .rst(rst) {
     dff counter[28];     // time taken for each cycle is 2^28/50E6
     fsm state = {ADD, SUBTRACT, MULTIPLY, DIVIDE, AND, OR, XOR, A, SHL, SHR, SRA, CMPEQ, CMPLT, CMPLE};
+    fsm toggle = {TRUE, FALSE};
     alumodule alumodule;
     multiply multiply;
     }
@@ -46,8 +48,23 @@ sig out_mul[16];
     multiply.a = 8b00000000;
     multiply.b = 8b00000000;
     multiply.in = 1b0;
-      
+    
+    // toggle dip so that case will stop once the alu output is false
+    case (toggle_dip) {
+    0: toggle.d = toggle.TRUE;
+    1: toggle.d = toggle.FALSE;
+    }
+    
+    case (toggle.q) {
+      toggle.TRUE:
+      alu = alu;
+      toggle.FALSE:
+      alu = 16b1100000000000000;
+    }
+    
+    // 14 test cases to check for output of each unit, whether they are correct, check with hardcoded answer
     case (state.q){
+      // add: ADD: a = 16b0101010110101011, b = 16b0010000001000100
       state.ADD:
         alumodule.alufn = 6b000000;             
         alumodule.a = 16b0101010110101011;
@@ -68,7 +85,8 @@ sig out_mul[16];
       //  else {
       //       state.d = state.ERROR;
       //       }
-            
+      
+      // add: SUBTRACT: a = 16b1001010110101011, b = 16b1000000001000100
       state.SUBTRACT:
           alumodule.alufn = 6b000001;
           alumodule.a = 16b1001010110101011;
@@ -86,7 +104,8 @@ sig out_mul[16];
               state.d = state.MULTIPLY;
                 }
             }
-        
+      
+      // multiply: MULTIPLY (separated from alu): a = 8b00111111, b = 8b00000011
       state.MULTIPLY:
         multiply.a = 8b00111111;
         multiply.b = 8b00000011;
@@ -105,6 +124,7 @@ sig out_mul[16];
           }
         }
         
+      // multiply: DIVIDE (separated from alu): a = 8b00111111, b = 8b00000011
       state.DIVIDE:
         multiply.a = 8b00111111;
         multiply.b = 8b00000011;
@@ -123,6 +143,7 @@ sig out_mul[16];
           }
         }
       
+      // compare: AND: a = 16b1001010110101011, b = 16b1000000001000100
       state.AND:
           alumodule.alufn = 6b011000;
           alumodule.a = 16b1001010110101011;
@@ -141,6 +162,7 @@ sig out_mul[16];
                 }
             }
         
+      // compare: OR: a = 16b1001010110101011, b = 16b1000000001000100
       state.OR:
           alumodule.alufn = 6b011110;
           alumodule.a = 16b1001010110101011;
@@ -158,7 +180,7 @@ sig out_mul[16];
               state.d = state.XOR;
                 }
             }
-        
+      // compare: XOR: a = 16b1001010110101011, b = 16b1000000001000100
       state.XOR:
           alumodule.alufn = 6b010110;
           alumodule.a = 16b1001010110101011;
@@ -176,7 +198,8 @@ sig out_mul[16];
               state.d = state.A;
                 }
             }
-        
+      
+      // compare: A: a = 16b1001010110101011, b = 16b1000000001000100
       state.A:
           alumodule.alufn = 6b011010;
           alumodule.a = 16b1001010110101011;
@@ -194,7 +217,8 @@ sig out_mul[16];
               state.d = state.SHL;
                 }
             }
-        
+      
+      // shift: SHL: a = 16b1001010110101011, b = 16b0000000000000001
       state.SHL:
           alumodule.alufn = 6b100000;
           alumodule.a = 16b1001010110101011;
@@ -212,7 +236,8 @@ sig out_mul[16];
               state.d = state.SHR;
                 }
             }
-        
+       
+      // shiftL SHR: a = 16b1001010110101011, b = 16b0000000000000001
       state.SHR:
           alumodule.alufn = 6b100001;
           alumodule.a = 16b1001010110101011;
@@ -230,7 +255,8 @@ sig out_mul[16];
               state.d = state.SRA;
                 }
             }
-        
+      
+      // shift: SRA: a = 16b1001010110101011, b = 16b0000000000000001
       state.SRA:
           alumodule.alufn = 6b100011;
           alumodule.a = 16b1001010110101011;
@@ -249,6 +275,7 @@ sig out_mul[16];
                 }
             }
         
+      // compare: CMPEQ: a = 16b1001010110101011, b = 16b1000000001000100
       state.CMPEQ:
           alumodule.alufn = 6b110011;
           alumodule.a = 16b1001010110101011;
@@ -267,6 +294,7 @@ sig out_mul[16];
                 }
             }
         
+      // compare: CMPLT: a = 16b1001010110101011, b = 16b1000000001000100
       state.CMPLT:
           alumodule.alufn = 6b110101;
           alumodule.a = 16b1001010110101011;
@@ -284,7 +312,7 @@ sig out_mul[16];
               state.d = state.CMPLE;
                 }
             }
-        
+      // compare COMPLE: a = 16b1001010110101011, b = 16b1000000001000100
       state.CMPLE:
           alumodule.alufn = 6b110101;
           alumodule.a = 16b1001010110101011;

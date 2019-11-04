@@ -13,7 +13,7 @@ module mojo_top (
     input avr_rx_busy,       // AVR RX buffer full
     
     // input
-    // input io_dip [3][8],
+    input io_dip [3][8],
     // input io_button[5],
     
     // output
@@ -53,6 +53,8 @@ module mojo_top (
     io_led[0] = tester.led_result;
     io_led[1] = tester.led_alu_1;
     io_led[2] = tester.led_alu_2;
+    
+    tester.toggle_dip = io_dip[0][0];
     
   }
 }
