@@ -82,9 +82,6 @@ sig out_mul[16];
               state.d = state.SUBTRACT;
                 }
             }
-      //  else {
-      //       state.d = state.ERROR;
-      //       }
       
       // add: SUBTRACT: a = 16b1001010110101011, b = 16b1000000001000100
       state.SUBTRACT:
@@ -143,7 +140,7 @@ sig out_mul[16];
           }
         }
       
-      // compare: AND: a = 16b1001010110101011, b = 16b1000000001000100
+      // boolean: AND: a = 16b1001010110101011, b = 16b1000000001000100
       state.AND:
           alumodule.alufn = 6b011000;
           alumodule.a = 16b1001010110101011;
@@ -162,7 +159,7 @@ sig out_mul[16];
                 }
             }
         
-      // compare: OR: a = 16b1001010110101011, b = 16b1000000001000100
+      // boolean: OR: a = 16b1001010110101011, b = 16b1000000001000100
       state.OR:
           alumodule.alufn = 6b011110;
           alumodule.a = 16b1001010110101011;
@@ -180,7 +177,7 @@ sig out_mul[16];
               state.d = state.XOR;
                 }
             }
-      // compare: XOR: a = 16b1001010110101011, b = 16b1000000001000100
+      // boolean: XOR: a = 16b1001010110101011, b = 16b1000000001000100
       state.XOR:
           alumodule.alufn = 6b010110;
           alumodule.a = 16b1001010110101011;
@@ -199,7 +196,7 @@ sig out_mul[16];
                 }
             }
       
-      // compare: A: a = 16b1001010110101011, b = 16b1000000001000100
+      // boolean: A: a = 16b1001010110101011, b = 16b1000000001000100
       state.A:
           alumodule.alufn = 6b011010;
           alumodule.a = 16b1001010110101011;

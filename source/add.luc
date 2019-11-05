@@ -16,12 +16,12 @@ module add (
   always {
     
     case(alufn[0]){
-        1b0:                                                                         // if alufn[0]==0, add a to b
+        1b0: // if alufn[0]==0, add a to b
           sum_intermediate = a+b;
-          v = (((a[15])&(b[15])&(~sum_intermediate[15])) | ((~a[15])&(~b[15])&(sum_intermediate[15])));       // checking for addition overflow
-        1b1:                                                                         // if alufn[0]==1, subtract b from a
+          v = (((a[15])&(b[15])&(~sum_intermediate[15])) | ((~a[15])&(~b[15])&(sum_intermediate[15]))); // checking for addition overflow
+        1b1: // if alufn[0]==1, subtract b from a
           sum_intermediate = a-b;
-          v = (((a[15])&(b[15])&(~sum_intermediate[15])) | ((~a[15])&(~b[15])&(sum_intermediate[15])));       // checking for subtraction overflow
+          v = (((a[15])&(b[15])&(~sum_intermediate[15])) | ((~a[15])&(~b[15])&(sum_intermediate[15]))); // checking for subtraction overflow
         default:
           sum_intermediate = a+b; 
           v = (((a[15])&(b[15])&(~sum_intermediate[15])) | ((~a[15])&(~b[15])&(sum_intermediate[15])));           
